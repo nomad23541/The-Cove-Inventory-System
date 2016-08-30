@@ -1,16 +1,15 @@
 package com.chrisreading.coveis.handler;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.FileUtils;
 
 /**
  * Manages the loading/saving of
@@ -18,16 +17,28 @@ import com.chrisreading.coveis.model.Item;
  */
 public class DataManager {
 	
-	private List<Item> items;
-	private File dir, inventory;
+	/** instance of this class */
+	public static DataManager dm;
+	
+	private List<Item> inventory;
+	private File dir, inventoryDir;
 	
 	/**
 	 * Default constructor
 	 */
 	public DataManager() {
-		items = new ArrayList<Item>(); // create empty list before populated
+		dm = this;
+		this.inventory = new ArrayList<Item>(); // create empty list before populated
 		this.dir = new File(System.getenv("APPDATA") + "\\CoveInventory\\"); // directory where program files are saved/loaded
-		this.inventory = new File(dir + "\\inventory.bin"); // file where items are saved into
+		this.inventoryDir = new File(dir + "\\Inventory\\"); // directory where item files are saved/loaded
+	}
+	
+	/**
+	 * Get an instance of this class
+	 * @return
+	 */
+	public static DataManager getInstance() {
+		return dm;
 	}
 	
 	/**
@@ -35,7 +46,7 @@ public class DataManager {
 	 * @return List of items
 	 */
 	public List<Item> getItems() {
-		return items;
+		return inventory;
 	}
 	
 	/**
@@ -43,7 +54,6 @@ public class DataManager {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	@SuppressWarnings("unchecked")
 	public void load() throws IOException, ClassNotFoundException {
 		// if doesn't exit, go through first time setup
 		if(!dir.exists()) {
@@ -51,23 +61,24 @@ public class DataManager {
 			if(dir.mkdir()) {
 				System.out.println("Created " + dir.getAbsolutePath());
 				
-				// then create file
-				if(inventory.createNewFile()) {
-					System.out.println("Created " + inventory.getAbsolutePath());
+				// then create inventory dir
+				if(inventoryDir.mkdir()) {
+					System.out.println("Created " + inventoryDir.getAbsolutePath());
 				} else {
-					System.out.println("Error " + inventory.getAbsolutePath());
+					System.out.println("Error " + inventoryDir.getAbsolutePath());
 				}
 			} else {
 				System.out.println("Error " + dir.getAbsolutePath());
 			}
 		} else {
-			// if the dir exists, load from inventory file to load arraylist
-			FileInputStream fis = new FileInputStream(inventory);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			items = (ArrayList<Item>) ois.readObject();
-			ois.close();
-			
-			System.out.println("Loaded " + inventory.getName());
+			// if the dir exists, load from item files to load inventory list
+			for(File f : FileUtils.getFiles(inventoryDir)) {
+				List<String> lines = Files.readAllLines(Paths.get(f.toURI())); // get all lines from file
+				Item item = new Item(lines.get(0), Double.parseDouble(lines.get(1)), Integer.parseInt(lines.get(2)));
+				inventory.add(item); // now add to the inventory list
+				
+				System.out.println("Loaded " + f.getName());
+			}
 		}
 		
 		System.out.println("Load complete");
@@ -79,13 +90,17 @@ public class DataManager {
 	 */
 	public void save() throws IOException {
 		// only perform if the file exists
-		if(inventory.exists()) {
-			FileOutputStream fos = new FileOutputStream(inventory);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(items);
-			oos.close();
+		if(inventoryDir.exists()) {
+			// create a file for every item in system
+			for(Item item : inventory) {
+				PrintWriter writer = new PrintWriter(inventoryDir + "\\" + item.getName().replaceAll("\\s+", "") + "Item.item", "UTF-8");
+				writer.println(item.getName());
+				writer.println(item.getPrice());
+				writer.println(item.getAmount());
+				writer.close(); // stop writing to this file
+			}
 			
-			System.out.println("Saved successful");
+			System.out.println("Saves successful");
 		} else {
 			System.out.println("Error saving");
 		}
