@@ -17,9 +17,6 @@ import com.chrisreading.coveis.util.FileUtils;
  */
 public class DataManager {
 	
-	/** instance of this class */
-	public static DataManager dm;
-	
 	private List<Item> inventory;
 	private File dir, inventoryDir;
 	
@@ -27,18 +24,9 @@ public class DataManager {
 	 * Default constructor
 	 */
 	public DataManager() {
-		dm = this;
-		this.inventory = new ArrayList<Item>(); // create empty list before populated
+		inventory = InventoryManager.getInstance().getInventoryList();
 		this.dir = new File(System.getenv("APPDATA") + "\\CoveInventory\\"); // directory where program files are saved/loaded
 		this.inventoryDir = new File(dir + "\\Inventory\\"); // directory where item files are saved/loaded
-	}
-	
-	/**
-	 * Get an instance of this class
-	 * @return
-	 */
-	public static DataManager getInstance() {
-		return dm;
 	}
 	
 	/**
