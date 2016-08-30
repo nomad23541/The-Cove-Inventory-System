@@ -12,8 +12,7 @@ import javafx.beans.property.StringProperty;
 /**
  *  Model for a food item sold in the cove
  */
-public class Item implements Serializable {
-	private static final long serialVersionUID = -5962031618781287190L;
+public class Item {
 	
 	private StringProperty name;
 	private DoubleProperty price;
