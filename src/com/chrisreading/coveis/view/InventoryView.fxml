@@ -20,6 +20,9 @@
           <TableColumn fx:id="priceCol" prefWidth="101.0" text="Price" />
             <TableColumn fx:id="amountCol" prefWidth="101.0" text="Amount in Stock" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <GridPane layoutX="409.0" layoutY="14.0" prefHeight="101.0" prefWidth="451.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
@@ -49,8 +52,8 @@
       </GridPane>
       <ButtonBar layoutX="175.0" layoutY="580.0" prefHeight="40.0" prefWidth="220.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Remove Item" />
-            <Button mnemonicParsing="false" text="Add New Item" />
+          <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleRemove" text="Remove Item" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" text="Add New Item" />
         </buttons>
       </ButtonBar>
       <ImageView fitHeight="198.0" fitWidth="211.0" layoutX="409.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="409.0" AnchorPane.topAnchor="115.0" />
