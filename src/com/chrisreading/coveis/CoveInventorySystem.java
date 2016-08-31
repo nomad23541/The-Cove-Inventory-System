@@ -24,8 +24,7 @@ public class CoveInventorySystem {
 		im = new InventoryManager();
 		dm = new DataManager();
 		dm.load(); // first time setup / load previous files
-		
-		im.addItem(new Item("Hot Cheetos", 1.23, 50));
+
 	}
 	
 	/**
