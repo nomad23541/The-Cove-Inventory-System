@@ -35,6 +35,18 @@ public class Item {
 	 * GETTERS & SETTERS
 	 */
 	
+	public StringProperty getNameProperty() {
+		return name;
+	}
+	
+	public DoubleProperty getPriceProperty() {
+		return price;
+	}
+	
+	public IntegerProperty getAmountProperty() {
+		return amount;
+	}
+	
 	public void setName(String name) {
 		this.name.set(name);
 	}
