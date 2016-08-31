@@ -24,6 +24,19 @@ public class CoveInventorySystem {
 		im = new InventoryManager();
 		dm = new DataManager();
 		dm.load(); // first time setup / load previous files
+		
+		// probably not the best way to do this
+		// but save the newly added data on exit
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+		    @Override
+		    public void run() {
+		        try {
+					dm.save();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    }
+		});
 
 	}
 	
