@@ -2,6 +2,8 @@ package com.chrisreading.coveis;
 
 import java.io.IOException;
 
+import com.chrisreading.coveis.control.InventoryController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,6 +46,7 @@ public class CoveApplication extends Application {
 		rootLayout.setCenter(pane);
 		
 		// TODO: add controller
+		InventoryController controller = loader.getController();
 	}
 
 }
