@@ -11,8 +11,7 @@ public class ConfirmationDialogController extends ADialogController {
 	@FXML
 	private Label text;
 	
-	public ConfirmationDialogController(String text) {
-		this.text.setText(text);
+	public ConfirmationDialogController() {
 	}
 
 	@Override
@@ -27,6 +26,10 @@ public class ConfirmationDialogController extends ADialogController {
 	@Override
 	protected void handleCancel() {
 		dialogStage.close();
+	}
+	
+	public void setText(String text) {
+		this.text.setText(text);
 	}
 
 }

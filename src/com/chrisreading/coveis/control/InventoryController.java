@@ -57,15 +57,12 @@ public class InventoryController {
 		// show add dialog
 		// temp
 		InventoryManager.getInstance().addItem(new Item("Hot Cheetos", 1.23, 50));
-		List<TableColumn> colString = new ArrayList<TableColumn>(nameCol);
-		TableColumn[] colNum = new TableColumn[] { priceCol, amountCol };
-		NodeUtils.refreshTable(table, inventory, colString., colNum);
 	}
 	
 	@FXML
 	private void handleRemove() {
 		try {
-			boolean remove = ca.showConfirmationDialog();
+			boolean remove = ca.showConfirmationDialog("Remove item?");
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
