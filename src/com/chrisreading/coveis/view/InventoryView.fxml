@@ -14,11 +14,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.InventoryController">
    <children>
-      <TableView layoutX="9.0" layoutY="8.0" prefHeight="573.0" prefWidth="386.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <TableView fx:id="table" layoutX="9.0" layoutY="8.0" prefHeight="573.0" prefWidth="386.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columns>
-          <TableColumn prefWidth="108.0" text="Name" />
-          <TableColumn prefWidth="101.0" text="Price" />
-            <TableColumn prefWidth="101.0" text="Amount in Stock" />
+          <TableColumn fx:id="nameCol" prefWidth="108.0" text="Name" />
+          <TableColumn fx:id="priceCol" prefWidth="101.0" text="Price" />
+            <TableColumn fx:id="amountCol" prefWidth="101.0" text="Amount in Stock" />
         </columns>
       </TableView>
       <GridPane layoutX="409.0" layoutY="14.0" prefHeight="101.0" prefWidth="451.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
