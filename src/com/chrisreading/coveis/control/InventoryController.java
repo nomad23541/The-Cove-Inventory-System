@@ -1,13 +1,10 @@
 package com.chrisreading.coveis.control;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
-import com.chrisreading.coveis.util.NodeUtils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,13 +35,23 @@ public class InventoryController {
 	@FXML
 	private Button addButton;
 	
-	private ObservableList<Item> inventory = FXCollections.observableArrayList(InventoryManager.getInstance().getInventoryList());
+	private ObservableList<Item> inventory;
 	
 	public InventoryController() {}
+	
+	/**
+	 * Refresh the list by setting the
+	 * observable list to the inventory manager's
+	 * list and then set the table items
+	 */
+	public void refreshTable() {
+		inventory = FXCollections.observableArrayList(InventoryManager.getInstance().getInventoryList());
+		table.setItems(inventory);
+	}
 
 	@FXML
 	public void initialize() {
-		table.setItems(inventory);
+		refreshTable();
 		
 		// load table with loaded items in list
 		nameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
@@ -56,7 +63,7 @@ public class InventoryController {
 	private void handleAdd() {
 		// show add dialog
 		// temp
-		InventoryManager.getInstance().addItem(new Item("Hot Cheetos", 1.23, 50));
+		refreshTable();
 	}
 	
 	@FXML
@@ -67,6 +74,7 @@ public class InventoryController {
 			// if ok is clicked, remove the selected item
 			if(remove) {
 				InventoryManager.getInstance().removeItem(table.getSelectionModel().getSelectedItem());
+				refreshTable();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
