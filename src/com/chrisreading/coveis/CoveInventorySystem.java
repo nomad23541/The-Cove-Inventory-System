@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.chrisreading.coveis.handler.DataManager;
 import com.chrisreading.coveis.handler.InventoryManager;
+import com.chrisreading.coveis.model.Item;
 
 import javafx.application.Application;
 
@@ -23,6 +24,8 @@ public class CoveInventorySystem {
 		im = new InventoryManager();
 		dm = new DataManager();
 		dm.load(); // first time setup / load previous files
+		
+		im.addItem(new Item("Hot Cheetos", 1.23, 50));
 	}
 	
 	/**
