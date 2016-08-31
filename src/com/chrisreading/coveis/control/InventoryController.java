@@ -1,10 +1,13 @@
 package com.chrisreading.coveis.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.NodeUtils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +57,9 @@ public class InventoryController {
 		// show add dialog
 		// temp
 		InventoryManager.getInstance().addItem(new Item("Hot Cheetos", 1.23, 50));
+		List<TableColumn> colString = new ArrayList<TableColumn>(nameCol);
+		TableColumn[] colNum = new TableColumn[] { priceCol, amountCol };
+		NodeUtils.refreshTable(table, inventory, colString., colNum);
 	}
 	
 	@FXML
