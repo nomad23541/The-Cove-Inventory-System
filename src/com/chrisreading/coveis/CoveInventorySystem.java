@@ -39,7 +39,7 @@ public class CoveInventorySystem {
 	 * Get the InventoryManager
 	 * @return
 	 */
-	public InventoryManager getIM() {
+	public InventoryManager getInventoryManager() {
 		return im;
 	}
 	
@@ -47,7 +47,7 @@ public class CoveInventorySystem {
 	 * Get the DataManager
 	 * @return
 	 */
-	public DataManager getDM() {
+	public DataManager getDataManager() {
 		return dm;
 	}
 
