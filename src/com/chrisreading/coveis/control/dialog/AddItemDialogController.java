@@ -17,16 +17,19 @@ public class AddItemDialogController extends ADialogController {
 	private Item item; // item to be added
 
 	protected void initialize() {
-		item = new Item();
 	}
 
 	protected void handleOk() {
 		item.setName(nameField.getText());
-		item.setPrice(item.getPrice());
-		item.setAmount(item.getAmount());
+		item.setPrice(Double.parseDouble(priceField.getText()));
+		item.setAmount(Integer.parseInt(amountField.getText()));
 		
 		okClicked = true;
 		dialogStage.close();
+	}
+	
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 	protected void handleCancel() {
