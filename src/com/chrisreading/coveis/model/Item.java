@@ -22,7 +22,7 @@ public class Item {
 	 * Default constructor
 	 */
 	public Item() {
-		
+		this(null, 0, 0);
 	}
 	
 	public Item(String name, double price, int amount) {
