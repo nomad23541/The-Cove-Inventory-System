@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.chrisreading.coveis.model.Item;
@@ -79,6 +78,17 @@ public class DataManager {
 	public void save() throws IOException {
 		// only perform if the file exists
 		if(inventoryDir.exists()) {
+			// if there is a file in the inventory directory that isn't
+			// in the inventory list, delete it
+			List<File> files = FileUtils.getFiles(inventoryDir);
+			for(Item item : inventory) {
+				for(File file : files) {
+					if(item.getName().replaceAll("\\s+", "") + "Item.item" != file.getName()) {
+						FileUtils.deleteItemFile(item.getName() + "Item.item", inventoryDir);
+					}
+				}
+			}
+			
 			// create a file for every item in system
 			for(Item item : inventory) {
 				PrintWriter writer = new PrintWriter(inventoryDir + "\\" + item.getName().replaceAll("\\s+", "") + "Item.item", "UTF-8");
