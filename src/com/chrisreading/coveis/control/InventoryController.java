@@ -61,9 +61,17 @@ public class InventoryController {
 	
 	@FXML
 	private void handleAdd() {
-		// show add dialog
-		// temp
-		refreshTable();
+		Item item = new Item();
+		try {
+			boolean add = ca.showAddDialog(item);
+			if(add) {
+				InventoryManager.getInstance().addItem(item);
+				refreshTable();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
