@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chrisreading.coveis.model.Item;
+
 /**
  * Utils for file use
  */
@@ -24,6 +26,11 @@ public class FileUtils {
 		}
 		
 		return results;
+	}
+	
+	public static boolean deleteItemFile(String name, File dir) {
+		File file = new File(dir + "\\" + name);
+		return file.delete();
 	}
 	
 }
