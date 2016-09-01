@@ -14,9 +14,11 @@ public class InventoryManager {
 	public static InventoryManager im;
 	
 	private List<Item> inventory;
+	private List<Item> toRemove;
 	
 	public InventoryManager() {
 		this.inventory = new ArrayList<Item>(); // create empty list before populated
+		this.toRemove = new ArrayList<Item>(); // items to be removed (file deleted at save)
 		im = this;
 	}
 	
@@ -26,6 +28,10 @@ public class InventoryManager {
 	 */
 	public static InventoryManager getInstance() {
 		return im;
+	}
+	
+	public List<Item> getToRemoveList() {
+		return toRemove;
 	}
 	
 	public List<Item> getInventoryList() {
@@ -49,6 +55,7 @@ public class InventoryManager {
 	public void removeItem(Item item) {
 		if(inventory.contains(item)) {
 			inventory.remove(item);
+			toRemove.add(item);
 			System.out.println("Removed item: " + item.getName());
 		}
 	}
