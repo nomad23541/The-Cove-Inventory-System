@@ -3,7 +3,9 @@ package com.chrisreading.coveis;
 import java.io.IOException;
 
 import com.chrisreading.coveis.control.InventoryController;
+import com.chrisreading.coveis.control.dialog.AddItemDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController;
+import com.chrisreading.coveis.model.Item;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +72,32 @@ public class CoveApplication extends Application {
 		// set the controller
 		ConfirmationDialogController controller = loader.getController();
 		controller.setText(text);
+		controller.setDialogStage(dialogStage);
+		
+		// show the dialog and wait til the user closes it
+		dialogStage.showAndWait();
+		
+		return controller.isOkClicked();
+	}
+	
+	public boolean showAddDialog(Item item) throws IOException {
+		// load the fxml file
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/AddItemDialog.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+				
+		// create the dialog stage
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Add Item");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.setResizable(false);
+		dialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		
+		// set the controller
+		AddItemDialogController controller = loader.getController();
+		controller.setItem(item);
 		controller.setDialogStage(dialogStage);
 		
 		// show the dialog and wait til the user closes it
