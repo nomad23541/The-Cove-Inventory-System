@@ -16,6 +16,8 @@ import com.chrisreading.coveis.util.FileUtils;
  */
 public class DataManager {
 	
+	private String OS = System.getProperty("os.name").toLowerCase(); // os property
+	
 	private List<Item> inventory;
 	private File dir, inventoryDir;
 	
@@ -24,8 +26,18 @@ public class DataManager {
 	 */
 	public DataManager() {
 		inventory = InventoryManager.getInstance().getInventoryList();
-		this.dir = new File(System.getenv("APPDATA") + "\\CoveInventory\\"); // directory where program files are saved/loaded
-		this.inventoryDir = new File(dir + "\\Inventory\\"); // directory where item files are saved/loaded
+		
+		// detect if on a mac or windows to set installation directories correctly
+		if(OS.indexOf("win") >= 0) {
+			this.dir = new File(System.getenv("APPDATA") + "\\CoveInventory\\"); // directory where program files are saved/loaded
+			this.inventoryDir = new File(dir + "\\Inventory\\"); // directory where item files are saved/loaded
+		} else if(OS.indexOf("mac") >= 0) {
+			this.dir = new File(System.getProperty("user.home") + "/Library/Application Support/CoveInventory/");
+			this.inventoryDir = new File(dir + "/Inventory/");
+		}
+
+		
+
 	}
 	
 	/**
