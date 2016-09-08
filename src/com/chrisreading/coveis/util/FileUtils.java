@@ -28,9 +28,4 @@ public class FileUtils {
 		return results;
 	}
 	
-	public static boolean deleteItemFile(String name, File dir) {
-		File file = new File(dir + "\\" + name);
-		return file.delete();
-	}
-	
 }
