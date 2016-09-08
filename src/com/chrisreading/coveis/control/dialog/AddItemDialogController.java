@@ -2,6 +2,7 @@ package com.chrisreading.coveis.control.dialog;
 
 import com.chrisreading.coveis.model.Item;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -17,6 +18,13 @@ public class AddItemDialogController extends ADialogController {
 	private Item item; // item to be added
 
 	protected void initialize() {
+		// make name field first selected (easier input)
+		// use runLater because initialize() isn't ready at first
+		Platform.runLater(new Runnable() {
+			public void run() {
+				nameField.requestFocus();	
+			}
+		});
 	}
 
 	protected void handleOk() {
