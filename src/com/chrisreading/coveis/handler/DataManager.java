@@ -35,9 +35,6 @@ public class DataManager {
 			this.dir = new File(System.getProperty("user.home") + "/Library/Application Support/CoveInventory/");
 			this.inventoryDir = new File(dir + "/Inventory/");
 		}
-
-		
-
 	}
 	
 	/**
@@ -90,14 +87,10 @@ public class DataManager {
 	public void save() throws IOException {
 		// only perform if the file exists
 		if(inventoryDir.exists()) {
-			// if there is a file in the inventory directory that isn't
-			// in the inventory list, delete it
-			List<File> files = FileUtils.getFiles(inventoryDir);
-			for(Item item : inventory) {
-				for(File file : files) {
-					if(item.getName().replaceAll("\\s+", "") + "Item.item" != file.getName()) {
-						FileUtils.deleteItemFile(item.getName() + "Item.item", inventoryDir);
-					}
+			// remove all files in the directory before saving new items
+			for(File file : FileUtils.getFiles(inventoryDir)) {
+				if(!file.isDirectory()) {
+					file.delete();
 				}
 			}
 			
