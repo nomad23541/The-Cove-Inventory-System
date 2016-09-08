@@ -33,14 +33,7 @@ public class InventoryManager {
 	}
 	
 	public void addItem(Item item) {
-		if(!inventory.isEmpty()) {
-			for(Item i : inventory) {
-				if(!i.getName().equals(item.getName())) {
-					inventory.add(item);
-					System.out.println("Added new item: " + item.getName());
-				}
-			}	
-		} else {
+		if(!inventory.contains(item)) {
 			inventory.add(item);
 			System.out.println("Added new item: " + item.getName());
 		}
