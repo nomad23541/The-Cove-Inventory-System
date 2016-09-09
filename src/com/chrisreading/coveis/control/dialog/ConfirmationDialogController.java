@@ -1,6 +1,8 @@
 package com.chrisreading.coveis.control.dialog;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
@@ -10,12 +12,20 @@ public class ConfirmationDialogController extends ADialogController {
 	
 	@FXML
 	private Label text;
+	@FXML
+	private Button okButton;
 	
 	public ConfirmationDialogController() {
 	}
 
 	@Override
-	protected void initialize() {}
+	protected void initialize() {
+		Platform.runLater(new Runnable() {
+			public void run() {
+				okButton.requestFocus();
+			}
+		});
+	}
 
 	@Override
 	protected void handleOk() {
