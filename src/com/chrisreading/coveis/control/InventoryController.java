@@ -6,12 +6,15 @@ import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Controller class to handle InventoryView.fxml
@@ -34,6 +37,8 @@ public class InventoryController {
 	private Button removeButton;
 	@FXML
 	private Button addButton;
+	@FXML
+	private Button editButton;
 	
 	private ObservableList<Item> inventory;
 	
@@ -57,6 +62,15 @@ public class InventoryController {
 		nameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
 		priceCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty());
 		amountCol.setCellValueFactory(cellData -> cellData.getValue().getAmountProperty());
+		
+		// select first row if there is data
+		Platform.runLater(new Runnable() {
+			public void run() {
+				table.requestFocus();
+		        table.getSelectionModel().select(0);
+		        table.getFocusModel().focus(0);
+			}
+		});
 	}
 	
 	@FXML
@@ -87,7 +101,60 @@ public class InventoryController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// remove from list
+	}
+	
+	/**
+	 * Show edit dialog
+	 */
+	@FXML
+	private void handleEdit() {
+		Item item = table.getSelectionModel().getSelectedItem();
+		try {
+			boolean done = ca.showEditDialog(item);
+			if(done)
+				refreshTable();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Bring up edit dialog if double clicked
+	 * @param e
+	 */
+	@FXML
+	private void onTableClick(MouseEvent e) {
+		if(e.getClickCount() == 2) {
+			Item item = table.getSelectionModel().getSelectedItem();	
+			try {
+				boolean done = ca.showEditDialog(item);
+				if(done)
+					refreshTable();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * delete selected row if delete key is pressed
+	 * @param e
+	 */
+	@FXML
+	private void onTableKeyPress(KeyEvent e) {
+		try {
+			boolean remove = ca.showConfirmationDialog("Remove item?");
+			
+			// if ok is clicked, remove the selected item
+			if(remove) {
+				InventoryManager.getInstance().removeItem(table.getSelectionModel().getSelectedItem());
+				refreshTable();
+			}
+		} catch (IOException ei) {
+			ei.printStackTrace();
+		}
 	}
 	
 	/**
@@ -96,7 +163,5 @@ public class InventoryController {
 	public void setApplication(CoveApplication ca) {
 		this.ca = ca;
 	}
-	
-	
 	
 }
