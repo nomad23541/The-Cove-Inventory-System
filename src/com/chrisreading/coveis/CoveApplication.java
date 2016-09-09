@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.chrisreading.coveis.control.InventoryController;
 import com.chrisreading.coveis.control.dialog.AddItemDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController;
+import com.chrisreading.coveis.control.dialog.EditItemDialogController;
 import com.chrisreading.coveis.model.Item;
 
 import javafx.application.Application;
@@ -65,6 +66,7 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle("Are you sure?");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
@@ -91,12 +93,40 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle("Add Item");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		
 		// set the controller
 		AddItemDialogController controller = loader.getController();
+		controller.setItem(item);
+		controller.setDialogStage(dialogStage);
+		
+		// show the dialog and wait til the user closes it
+		dialogStage.showAndWait();
+		
+		return controller.isOkClicked();
+	}
+	
+	public boolean showEditDialog(Item item) throws IOException {
+		// load the fxml file
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/EditItemDialog.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+				
+		// create the dialog stage
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Edit Item");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.setResizable(false);
+		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
+		dialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		
+		// set the controller
+		EditItemDialogController controller = loader.getController();
 		controller.setItem(item);
 		controller.setDialogStage(dialogStage);
 		
