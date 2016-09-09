@@ -29,10 +29,13 @@ public class DataManager {
 		
 		// detect if on a mac or windows to set installation directories correctly
 		if(OS.indexOf("win") >= 0) {
-			this.dir = new File(System.getenv("APPDATA") + "\\CoveInventory\\"); // directory where program files are saved/loaded
-			this.inventoryDir = new File(dir + "\\Inventory\\"); // directory where item files are saved/loaded
+			this.dir = new File(System.getenv("APPDATA") + "/CoveInventory/"); // directory where program files are saved/loaded
+			this.inventoryDir = new File(dir + "/Inventory/"); // directory where item files are saved/loaded
 		} else if(OS.indexOf("mac") >= 0) {
 			this.dir = new File(System.getProperty("user.home") + "/Library/Application Support/CoveInventory/");
+			this.inventoryDir = new File(dir + "/Inventory/");
+		} else if(OS.indexOf("nux") >= 0) {
+			this.dir = new File(System.getProperty("user.home") + "/CoveInventory/");
 			this.inventoryDir = new File(dir + "/Inventory/");
 		}
 	}
