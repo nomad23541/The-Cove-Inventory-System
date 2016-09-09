@@ -3,6 +3,8 @@ package com.chrisreading.coveis;
 import java.io.IOException;
 
 import com.chrisreading.coveis.control.InventoryController;
+import com.chrisreading.coveis.control.RootController;
+import com.chrisreading.coveis.control.dialog.AboutDialogController;
 import com.chrisreading.coveis.control.dialog.AddItemDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController;
 import com.chrisreading.coveis.control.dialog.EditItemDialogController;
@@ -40,6 +42,9 @@ public class CoveApplication extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		primaryStage.show();
+		
+		RootController controller = loader.getController();
+		controller.setApplication(this);
 	}
 	
 	public void showInventoryOverview() throws IOException {
@@ -50,7 +55,6 @@ public class CoveApplication extends Application {
 		// set pane to the center of rootlayout
 		rootLayout.setCenter(pane);
 		
-		// TODO: add controller
 		InventoryController controller = loader.getController();
 		controller.setApplication(this);
 	}
@@ -128,6 +132,32 @@ public class CoveApplication extends Application {
 		// set the controller
 		EditItemDialogController controller = loader.getController();
 		controller.setItem(item);
+		controller.setDialogStage(dialogStage);
+		
+		// show the dialog and wait til the user closes it
+		dialogStage.showAndWait();
+		
+		return controller.isOkClicked();
+	}
+	
+	public boolean showAboutDialog() throws IOException {
+		// load the fxml file
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/AboutDialog.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+				
+		// create the dialog stage
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("About");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.setResizable(false);
+		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
+		dialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		
+		// set the controller
+		AboutDialogController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
 		
 		// show the dialog and wait til the user closes it
