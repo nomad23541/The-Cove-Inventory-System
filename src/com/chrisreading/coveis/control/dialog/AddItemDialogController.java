@@ -48,6 +48,4 @@ public class AddItemDialogController extends ADialogController {
 		return item;
 	}
 	
-	
-
 }
