@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
@@ -39,6 +40,12 @@ public class InventoryController {
 	private Button addButton;
 	@FXML
 	private Button editButton;
+	@FXML
+	private Label nameDetail;
+	@FXML
+	private Label priceDetail;
+	@FXML
+	private Label amountDetail;
 	
 	private ObservableList<Item> inventory;
 	
@@ -125,8 +132,10 @@ public class InventoryController {
 	 */
 	@FXML
 	private void onTableClick(MouseEvent e) {
+		Item item = table.getSelectionModel().getSelectedItem();	
+		
+		// if double clicked
 		if(e.getClickCount() == 2) {
-			Item item = table.getSelectionModel().getSelectedItem();	
 			try {
 				boolean done = ca.showEditDialog(item);
 				if(done)
@@ -136,6 +145,11 @@ public class InventoryController {
 				e1.printStackTrace();
 			}
 		}
+		
+		// show details
+		nameDetail.setText(item.getName());
+		priceDetail.setText(Double.toString(item.getPrice()));
+		amountDetail.setText(Integer.toString(item.getAmount()));	
 	}
 	
 	/**

@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,7 +13,7 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.InventoryController">
    <children>
-      <TableView fx:id="table" layoutX="9.0" layoutY="8.0" onKeyPressed="#onTableKeyPress" onMouseClicked="#onTableClick" prefHeight="573.0" prefWidth="386.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <TableView fx:id="table" layoutX="9.0" layoutY="8.0" onKeyPressed="#onTableKeyPress" onMouseClicked="#onTableClick" prefHeight="573.0" prefWidth="386.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="476.0" AnchorPane.topAnchor="10.0">
         <columns>
           <TableColumn fx:id="nameCol" prefWidth="108.0" text="Name" />
           <TableColumn fx:id="priceCol" prefWidth="101.0" text="Price" />
@@ -24,11 +23,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <GridPane layoutX="409.0" layoutY="14.0" prefHeight="101.0" prefWidth="451.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <GridPane layoutX="409.0" layoutY="14.0" prefHeight="101.0" prefWidth="451.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="120.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="155.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="97.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="244.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -37,26 +35,24 @@
           <RowConstraints maxHeight="100.0" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Name" GridPane.halignment="CENTER">
+            <Label fx:id="nameDetail" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="226.0" text="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
             <Label text="Price:" GridPane.rowIndex="1" />
             <Label text="Amount in Stock:" GridPane.rowIndex="2" />
-            <Label text="amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="price" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Edit Item" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
-            <Button mnemonicParsing="false" text="Sell Item" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Label fx:id="amountDetail" text="amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="priceDetail" text="price" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="sellButton" mnemonicParsing="false" text="Sell Item" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
-      <ButtonBar layoutX="131.0" layoutY="583.0" prefHeight="40.0" prefWidth="220.0">
+      <ButtonBar layoutX="131.0" layoutY="583.0" prefHeight="40.0" prefWidth="220.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="131.0">
         <buttons>
           <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleRemove" text="Remove" />
             <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleEdit" text="Edit..." />
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" text="Add..." />
         </buttons>
       </ButtonBar>
-      <ImageView fitHeight="198.0" fitWidth="211.0" layoutX="409.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="409.0" AnchorPane.topAnchor="115.0" />
    </children>
 </AnchorPane>
