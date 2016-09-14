@@ -44,7 +44,7 @@
             <Label text="Amount in Stock:" GridPane.rowIndex="2" />
             <Label fx:id="amountDetail" text="amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="priceDetail" text="price" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSell" prefHeight="25.0" prefWidth="59.0" text="Sell" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#handleSell" prefHeight="25.0" prefWidth="59.0" text="Sell" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
       <ButtonBar layoutX="131.0" layoutY="583.0" prefHeight="40.0" prefWidth="220.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="131.0">
