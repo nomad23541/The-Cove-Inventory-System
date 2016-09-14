@@ -81,6 +81,20 @@ public class InventoryController {
 	}
 	
 	@FXML
+	private void handleSell() {
+		Item item = table.getSelectionModel().getSelectedItem();
+		
+		try {
+			boolean sell = ca.showSellDialog(item);
+			if(sell) {
+				refreshTable();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
 	private void handleAdd() {
 		Item item = new Item();
 		try {
