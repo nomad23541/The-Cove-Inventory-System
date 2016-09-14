@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.AddItemDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.SellController">
    <children>
       <ButtonBar layoutX="147.0" layoutY="193.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
@@ -15,7 +15,7 @@
             <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Sell" />
         </buttons>
       </ButtonBar>
-      <Spinner fx:id="spinner" layoutX="94.0" layoutY="51.0" onScroll="#onScroll" prefHeight="25.0" prefWidth="130.0" />
+      <Spinner fx:id="spinner" layoutX="94.0" layoutY="51.0" onMouseClicked="#onScroll" prefHeight="25.0" prefWidth="130.0" />
       <Label layoutX="36.0" layoutY="55.0" text="Amount:" />
       <Label fx:id="priceLabel" layoutX="94.0" layoutY="80.0" text="\$0.00">
          <font>
