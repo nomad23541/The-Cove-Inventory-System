@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.FormatUtils;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ public class InventoryController {
 	@FXML
 	private TableColumn<Item, String> nameCol;
 	@FXML
-	private TableColumn<Item, Number> priceCol;
+	private TableColumn<Item, String> priceCol;
 	@FXML
 	private TableColumn<Item, Number> amountCol;
 	@FXML
@@ -67,7 +68,7 @@ public class InventoryController {
 		
 		// load table with loaded items in list
 		nameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-		priceCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty());
+		priceCol.setCellValueFactory(cellData -> FormatUtils.doubleToPrice(cellData.getValue().getPriceProperty()));
 		amountCol.setCellValueFactory(cellData -> cellData.getValue().getAmountProperty());
 		
 		// select first row if there is data

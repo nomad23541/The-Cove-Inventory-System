@@ -1,6 +1,7 @@
 package com.chrisreading.coveis.control.dialog;
 
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.FormatUtils;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -40,7 +41,7 @@ public class SellController extends ADialogController {
 	private void onScroll() {
 		int amount = (Integer) spinner.getValue(); // get amount
 		double price = item.getPrice() * amount; // get total price
-		priceLabel.setText("$" + price);
+		priceLabel.setText(FormatUtils.doubleToPrice(price));
 	}
 
 	@Override
