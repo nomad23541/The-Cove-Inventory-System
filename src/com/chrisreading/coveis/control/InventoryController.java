@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
-import com.chrisreading.coveis.util.FormatUtils;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -30,7 +29,7 @@ public class InventoryController {
 	@FXML
 	private TableColumn<Item, String> nameCol;
 	@FXML
-	private TableColumn<Item, String> priceCol;
+	private TableColumn<Item, Number> priceCol;
 	@FXML
 	private TableColumn<Item, Number> amountCol;
 	@FXML
@@ -68,7 +67,7 @@ public class InventoryController {
 		
 		// load table with loaded items in list
 		nameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-		priceCol.setCellValueFactory(cellData -> FormatUtils.doubleToPrice(cellData.getValue().getPriceProperty()));
+		priceCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty());
 		amountCol.setCellValueFactory(cellData -> cellData.getValue().getAmountProperty());
 		
 		// select first row if there is data
@@ -77,6 +76,12 @@ public class InventoryController {
 				table.requestFocus();
 		        table.getSelectionModel().select(0);
 		        table.getFocusModel().focus(0);
+		        
+		        // set gridpane details on first selected item
+		        Item item = table.getSelectionModel().getSelectedItem();
+				nameDetail.setText(item.getName());
+				priceDetail.setText(Double.toString(item.getPrice()));
+				amountDetail.setText(Integer.toString(item.getAmount()));
 			}
 		});
 	}
@@ -85,13 +90,22 @@ public class InventoryController {
 	private void handleSell() {
 		Item item = table.getSelectionModel().getSelectedItem();
 		
-		try {
-			boolean sell = ca.showSellDialog(item);
-			if(sell) {
-				refreshTable();
+		if(item.getAmount() > 0) {
+			try {
+				boolean sell = ca.showSellDialog(item);
+				if(sell) {
+					refreshTable();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		} else {
+			try {
+				ca.showConfirmationDialog("Error", "There aren't any to sell!");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -113,7 +127,7 @@ public class InventoryController {
 	@FXML
 	private void handleRemove() {
 		try {
-			boolean remove = ca.showConfirmationDialog("Remove item?");
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Remove item?");
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
@@ -174,7 +188,7 @@ public class InventoryController {
 	@FXML
 	private void onTableKeyPress(KeyEvent e) {
 		try {
-			boolean remove = ca.showConfirmationDialog("Remove item?");
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Remove item?");
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
