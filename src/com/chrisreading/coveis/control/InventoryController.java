@@ -126,12 +126,14 @@ public class InventoryController {
 	
 	@FXML
 	private void handleRemove() {
+		Item item = table.getSelectionModel().getSelectedItem();
+		
 		try {
-			boolean remove = ca.showConfirmationDialog("Confirmation", "Remove item?");
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Remove " + item.getName() + " Item?");
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
-				InventoryManager.getInstance().removeItem(table.getSelectionModel().getSelectedItem());
+				InventoryManager.getInstance().removeItem(item);
 				refreshTable();
 			}
 		} catch (IOException e) {
