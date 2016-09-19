@@ -60,7 +60,7 @@ public class CoveApplication extends Application {
 		controller.setApplication(this);
 	}
 	
-	public boolean showConfirmationDialog(String text) throws IOException {
+	public boolean showConfirmationDialog(String title, String text) throws IOException {
 		// load the fxml file
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/ConfirmationDialog.fxml"));
@@ -68,7 +68,7 @@ public class CoveApplication extends Application {
 				
 		// create the dialog stage
 		Stage dialogStage = new Stage();
-		dialogStage.setTitle("Are you sure?");
+		dialogStage.setTitle(title);
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
