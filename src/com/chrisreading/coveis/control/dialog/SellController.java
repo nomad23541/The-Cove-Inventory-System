@@ -16,20 +16,17 @@ public class SellController extends ADialogController {
 	
 	private Item item; // item selling
 	
-	private int amount; // amount to sell
-	private double total; // total price
-	
 	@FXML
 	private Label priceLabel;
 	@FXML
-	private Spinner spinner;
+	private Spinner<Integer> spinner;
 
 	@Override
 	protected void initialize() {
 		Platform.runLater(new Runnable() {
 			public void run() {
 				// set min to 1 and max to total amount
-				SpinnerValueFactory vf = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, item.getAmount());
+				SpinnerValueFactory<Integer> vf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, item.getAmount());
 				spinner.setValueFactory(vf);
 				spinner.setEditable(false);
 			}
