@@ -131,7 +131,7 @@ public class InventoryController {
 		Item item = table.getSelectionModel().getSelectedItem();
 		
 		try {
-			boolean remove = ca.showConfirmationDialog("Confirmation", "Remove " + item.getName() + " Item?");
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?");
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
