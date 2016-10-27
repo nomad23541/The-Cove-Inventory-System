@@ -60,6 +60,20 @@ public class InventoryController {
 		inventory = FXCollections.observableArrayList(InventoryManager.getInstance().getInventoryList());
 		table.setItems(inventory);
 	}
+	
+	/** 
+	 * Refresh that grid pane
+	 * that displays the item information
+	 */
+	public void refreshGrid() {
+        // set gridpane details on first selected item
+        Item item = table.getSelectionModel().getSelectedItem();
+        if(item != null) {
+			nameDetail.setText(item.getName());
+			priceDetail.setText(Double.toString(item.getPrice()));
+			amountDetail.setText(Integer.toString(item.getAmount()));	
+        }
+	}
 
 	@FXML
 	public void initialize() {
@@ -77,13 +91,7 @@ public class InventoryController {
 		        table.getSelectionModel().select(0);
 		        table.getFocusModel().focus(0);
 		        
-		        // set gridpane details on first selected item
-		        Item item = table.getSelectionModel().getSelectedItem();
-		        if(item != null) {
-					nameDetail.setText(item.getName());
-					priceDetail.setText(Double.toString(item.getPrice()));
-					amountDetail.setText(Integer.toString(item.getAmount()));	
-		        }
+		        refreshGrid();
 			}
 		});
 	}
@@ -97,6 +105,7 @@ public class InventoryController {
 				boolean sell = ca.showSellDialog(item);
 				if(sell) {
 					refreshTable();
+					refreshGrid();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -137,6 +146,7 @@ public class InventoryController {
 			if(remove) {
 				InventoryManager.getInstance().removeItem(item);
 				refreshTable();
+				refreshGrid();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -151,8 +161,10 @@ public class InventoryController {
 		Item item = table.getSelectionModel().getSelectedItem();
 		try {
 			boolean done = ca.showEditDialog(item);
-			if(done)
+			if(done) {
 				refreshTable();
+				refreshGrid();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
