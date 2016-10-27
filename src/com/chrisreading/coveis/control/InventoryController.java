@@ -79,9 +79,11 @@ public class InventoryController {
 		        
 		        // set gridpane details on first selected item
 		        Item item = table.getSelectionModel().getSelectedItem();
-				nameDetail.setText(item.getName());
-				priceDetail.setText(Double.toString(item.getPrice()));
-				amountDetail.setText(Integer.toString(item.getAmount()));
+		        if(item != null) {
+					nameDetail.setText(item.getName());
+					priceDetail.setText(Double.toString(item.getPrice()));
+					amountDetail.setText(Integer.toString(item.getAmount()));	
+		        }
 			}
 		});
 	}
