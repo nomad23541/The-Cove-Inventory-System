@@ -181,20 +181,19 @@ public class InventoryController {
 		
 		// if double clicked
 		if(e.getClickCount() == 2) {
-			try {
-				boolean done = ca.showEditDialog(item);
-				if(done)
-					refreshTable();
+			try {			
+				if(item != null) {
+					boolean done = ca.showEditDialog(item);
+					if(done) {
+						refreshTable();
+					}	
+				}
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 		
-		// show details
-		nameDetail.setText(item.getName());
-		priceDetail.setText(Double.toString(item.getPrice()));
-		amountDetail.setText(Integer.toString(item.getAmount()));	
+		refreshGrid();
 	}
 	
 	/**
