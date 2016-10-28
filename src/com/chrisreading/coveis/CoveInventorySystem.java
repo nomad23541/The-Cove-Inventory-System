@@ -13,14 +13,13 @@ import javafx.application.Application;
  */
 public class CoveInventorySystem {
 	
-	/** Instance of this class */
-	private static CoveInventorySystem instance;
-	
 	private InventoryManager im; // inventory manager used
 	private DataManager dm; // data manager used
 	
+	private CoveUpdater cu;
+	
 	public CoveInventorySystem() throws ClassNotFoundException, IOException {
-		instance = this;
+		cu = new CoveUpdater(); // init and check for updates first
 		im = new InventoryManager();
 		dm = new DataManager();
 		dm.load(); // first time setup / load previous files
@@ -37,30 +36,6 @@ public class CoveInventorySystem {
 				}
 		    }
 		});
-	}
-	
-	/**
-	 * Get an instance of this class to access the managers
-	 * @return
-	 */
-	public static CoveInventorySystem getInstance() {
-		return instance;
-	}
-	
-	/**
-	 * Get the InventoryManager
-	 * @return
-	 */
-	public InventoryManager getInventoryManager() {
-		return im;
-	}
-	
-	/**
-	 * Get the DataManager
-	 * @return
-	 */
-	public DataManager getDataManager() {
-		return dm;
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
