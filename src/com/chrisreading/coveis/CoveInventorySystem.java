@@ -16,10 +16,7 @@ public class CoveInventorySystem {
 	private InventoryManager im; // inventory manager used
 	private DataManager dm; // data manager used
 	
-	private CoveUpdater cu;
-	
 	public CoveInventorySystem() throws ClassNotFoundException, IOException {
-		cu = new CoveUpdater(); // init and check for updates first
 		im = new InventoryManager();
 		dm = new DataManager();
 		dm.load(); // first time setup / load previous files
