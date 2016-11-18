@@ -41,6 +41,8 @@ public class InventoryController {
 	@FXML
 	private Button editButton;
 	@FXML
+	private Button cartButton;
+	@FXML
 	private Label nameDetail;
 	@FXML
 	private Label priceDetail;
@@ -94,6 +96,15 @@ public class InventoryController {
 		        refreshGrid();
 			}
 		});
+	}
+	
+	@FXML
+	private void onCreateCart() {
+		try {
+			ca.showCartDialog(inventory);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

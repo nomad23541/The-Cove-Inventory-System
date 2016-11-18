@@ -6,12 +6,14 @@ import com.chrisreading.coveis.control.InventoryController;
 import com.chrisreading.coveis.control.RootController;
 import com.chrisreading.coveis.control.dialog.AboutDialogController;
 import com.chrisreading.coveis.control.dialog.AddItemDialogController;
+import com.chrisreading.coveis.control.dialog.CartDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController;
 import com.chrisreading.coveis.control.dialog.EditItemDialogController;
 import com.chrisreading.coveis.control.dialog.SellController;
 import com.chrisreading.coveis.model.Item;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -186,6 +188,33 @@ public class CoveApplication extends Application {
 		
 		// set the controller
 		AboutDialogController controller = loader.getController();
+		controller.setDialogStage(dialogStage);
+		
+		// show the dialog and wait til the user closes it
+		dialogStage.showAndWait();
+		
+		return controller.isOkClicked();
+	}
+	
+	public boolean showCartDialog(ObservableList<Item> inventory) throws IOException {
+		// load the fxml file
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/CartDialog.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+				
+		// create the dialog stage
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Cart");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.setResizable(false);
+		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
+		dialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		
+		// set the controller
+		CartDialogController controller = loader.getController();
+		controller.setInventoryList(inventory);
 		controller.setDialogStage(dialogStage);
 		
 		// show the dialog and wait til the user closes it

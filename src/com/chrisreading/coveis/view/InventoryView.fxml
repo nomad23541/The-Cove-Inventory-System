@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.InventoryController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.InventoryController">
    <children>
       <TableView fx:id="table" layoutX="9.0" layoutY="8.0" onKeyPressed="#onTableKeyPress" onMouseClicked="#onTableClick" prefHeight="573.0" prefWidth="386.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="476.0" AnchorPane.topAnchor="10.0">
         <columns>
@@ -54,5 +54,6 @@
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" text="Add..." />
         </buttons>
       </ButtonBar>
+      <Button fx:id="cartButton" layoutX="762.0" layoutY="576.0" mnemonicParsing="false" onAction="#onCreateCart" text="Create Cart" />
    </children>
 </AnchorPane>
