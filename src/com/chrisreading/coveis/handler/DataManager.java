@@ -99,7 +99,7 @@ public class DataManager {
 			
 			// create a file for every item in system
 			for(Item item : inventory) {
-				PrintWriter writer = new PrintWriter(inventoryDir + "\\" + item.getName().replaceAll("\\s+", "") + "Item.item", "UTF-8");
+				PrintWriter writer = new PrintWriter(inventoryDir + "/" + item.getName().replaceAll("\\s+", "") + "Item.item", "UTF-8");
 				writer.println(item.getName());
 				writer.println(item.getPrice());
 				writer.println(item.getAmount());
