@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.CartDialogController">
    <children>
-      <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="394.0" prefWidth="229.0">
+      <TableView fx:id="table" layoutX="14.0" layoutY="14.0" onMouseClicked="#handleTableClick" prefHeight="394.0" prefWidth="229.0">
         <columns>
           <TableColumn fx:id="nameCol" prefWidth="75.0" text="Item" />
           <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
