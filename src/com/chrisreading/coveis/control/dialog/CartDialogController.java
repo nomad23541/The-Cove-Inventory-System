@@ -1,6 +1,5 @@
 package com.chrisreading.coveis.control.dialog;
 
-import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.model.Item;
 
 import javafx.application.Platform;
@@ -8,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -28,9 +28,11 @@ public class CartDialogController extends ADialogController {
 	private ListView<String> list;
 	@FXML
 	private Label priceLabel;
+	@FXML
+	private Button btnClear;
 
 	private ObservableList<Item> inventory; // list of all items
-	private ObservableMap<String, Integer> cartList;
+	private ObservableMap<Item, Integer> cartList;
 
 	protected void initialize() {
 		cartList = FXCollections.observableHashMap();
@@ -42,10 +44,11 @@ public class CartDialogController extends ADialogController {
 		
 		Platform.runLater(new Runnable() {
 			public void run() {
-				table.setItems(inventory);
+				for(Item item : inventory) {
+					if(item.getAmount() > 0)
+						table.getItems().add(item);
+				}
 				table.requestFocus();
-		        table.getSelectionModel().select(0);
-		        table.getFocusModel().focus(0);
 			}
 		});
 	}
@@ -56,27 +59,50 @@ public class CartDialogController extends ADialogController {
 	
 	/**
 	 * Add selected item to the list view
-	 * when double clicked.
 	 */
 	@FXML
 	protected void handleTableClick(MouseEvent e) {
 		Item item = table.getSelectionModel().getSelectedItem();
 		
-		if(e.getClickCount() == 2) {
-			if(item != null) {
-				if(!cartList.containsKey(item.getName())) {
-					cartList.put(item.getName(), 1);
-					System.out.println("Added " + item.getName() + item.getAmount() + " to hashmap");
-				} else {
-					int amount = cartList.get(item.getName());
-					cartList.put(item.getName(), amount += 1);
-					System.out.println("Added " + item.getName() + item.getAmount() + " to hashmap");
-				}
+		if(item != null) {
+			if(!cartList.containsKey(item)) {
+				cartList.put(item, 1);
+			} else {
+				int amount = cartList.get(item);
+				if(amount <= item.getAmount() - 1)
+					cartList.put(item, amount += 1);
+				// else
+				// show error screen
 			}
 		}
+		
+		// clear list (this refreshes it)
+		list.getItems().clear();
+		for(Item i : cartList.keySet()) {
+			list.getItems().add(i.getName() + " (" + cartList.get(i) + ") " + i.getPrice());
+		}
+		
+		// get subtotal
+		double subtotal = 0.0;
+		for(Item i : cartList.keySet()) {
+			subtotal += i.getPrice() * cartList.get(i);
+		}
+		
+		// finally set subtotal label
+		priceLabel.setText("$" + subtotal);
+	}
+	
+	@FXML
+	protected void handleClear() {
+		list.getItems().clear();
+		cartList.clear();
+		priceLabel.setText("$0.00");
 	}
 
 	protected void handleOk() {
+		for(Item item : cartList.keySet()) {
+			item.setAmount(item.getAmount() - cartList.get(item));
+		}
 		okClicked = true;
 		dialogStage.close();
 	}
