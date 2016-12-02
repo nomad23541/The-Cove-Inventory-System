@@ -1,6 +1,7 @@
 package com.chrisreading.coveis.control.dialog;
 
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.FormatUtils;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -89,7 +90,7 @@ public class CartDialogController extends ADialogController {
 		}
 		
 		// finally set subtotal label
-		priceLabel.setText("$" + subtotal);
+		priceLabel.setText(FormatUtils.doubleToPrice(subtotal));
 	}
 	
 	@FXML
