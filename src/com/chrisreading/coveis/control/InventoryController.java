@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 
 /**
  * Controller class to handle InventoryView.fxml
@@ -48,6 +49,8 @@ public class InventoryController {
 	private Label priceDetail;
 	@FXML
 	private Label amountDetail;
+	@FXML
+	private GridPane gridPane;
 	
 	private ObservableList<Item> inventory;
 	
@@ -70,10 +73,14 @@ public class InventoryController {
 	public void refreshGrid() {
         // set gridpane details on first selected item
         Item item = table.getSelectionModel().getSelectedItem();
+        
         if(item != null) {
 			nameDetail.setText(item.getName());
 			priceDetail.setText(Double.toString(item.getPrice()));
-			amountDetail.setText(Integer.toString(item.getAmount()));	
+			amountDetail.setText(Integer.toString(item.getAmount()));
+			gridPane.setVisible(true);
+        } else {
+        	gridPane.setVisible(false);
         }
 	}
 
@@ -101,33 +108,11 @@ public class InventoryController {
 	@FXML
 	private void onCreateCart() {
 		try {
-			ca.showCartDialog(inventory);
+			boolean done = ca.showCartDialog(inventory);
+			if(done)
+				refreshGrid();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	@FXML
-	private void handleSell() {
-		Item item = table.getSelectionModel().getSelectedItem();
-		
-		if(item.getAmount() > 0) {
-			try {
-				boolean sell = ca.showSellDialog(item);
-				if(sell) {
-					refreshTable();
-					refreshGrid();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}	
-		} else {
-			try {
-				ca.showConfirmationDialog("Error", "There aren't any to sell!");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 	
