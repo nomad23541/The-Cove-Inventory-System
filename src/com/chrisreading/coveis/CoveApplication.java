@@ -41,6 +41,7 @@ public class CoveApplication extends Application {
 		rootLayout = (BorderPane) loader.load();
 		
 		Scene scene = new Scene(rootLayout);
+		scene.getStylesheets().add("/res/main.css");
 		primaryStage.setScene(scene);
 		primaryStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		primaryStage.show();
