@@ -26,6 +26,8 @@ public class CoveApplication extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	
+	private final String CSS = "/res/main.css";
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
@@ -76,6 +78,7 @@ public class CoveApplication extends Application {
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
+		scene.getStylesheets().add(CSS);
 		dialogStage.setScene(scene);
 		
 		// set the controller
@@ -103,6 +106,7 @@ public class CoveApplication extends Application {
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
+		scene.getStylesheets().add(CSS);
 		dialogStage.setScene(scene);
 		
 		// set the controller
@@ -130,6 +134,7 @@ public class CoveApplication extends Application {
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
+		scene.getStylesheets().add(CSS);
 		dialogStage.setScene(scene);
 		
 		// set the controller
@@ -157,6 +162,7 @@ public class CoveApplication extends Application {
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
+		scene.getStylesheets().add(CSS);
 		dialogStage.setScene(scene);
 		
 		// set the controller
@@ -183,6 +189,7 @@ public class CoveApplication extends Application {
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
+		scene.getStylesheets().add(CSS);
 		dialogStage.setScene(scene);
 		
 		// set the controller

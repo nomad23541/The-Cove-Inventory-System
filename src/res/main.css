@@ -2,27 +2,46 @@
 	-fx-font-family: "Tahoma";
 	-fx-text-fill: #333333;
 	
-	-fx-background-color: white;
+	-fx-background-color: #ecf0f1;
 }
+
+.hbox {
+	-fx-background-color: #2ecc71;
+	-fx-background-radius: 2;
+}
+
+.panel {
+	-fx-background-color: white;
+	-fx-background-radius: 4;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 9, 0, 0, 2);
+}
+
 
 .button {
-	-fx-background-color: #455569;
-	-fx-background-radius: 4;
-	-fx-border-color: #2D3845;
-	-fx-border-radius: 0 0 4 4;
-	-fx-border-width: 0 0 3 0;
-	-fx-text-fill: #C7DBF4;
-	-fx-font-size: 13;
-	-fx-padding: 6 15 6 15;
+    -fx-background-radius: 2;
+    -fx-background-color: #34495e;
+    
+	-fx-text-fill: white;
+	-fx-font-size: 15;
+	-fx-padding: 8 8 8 8;
+	
+	-fx-pref-width: 300px;
+	
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 9, 0, 0, 6); 
 }
 
-.button:hover {
-	-fx-background-color: #51647b;
+.button.button-warn {
+	-fx-background-color: #f1c40f;
+}
+
+.button.button-confirm {
+	-fx-background-color: #e74c3c;
 }
 
 .button:pressed {
-	-fx-border-width: 0;
+	-fx-background-color: #95a5a6;
 }
+
 
 .table-view {
 	-fx-background-color: transparent;
