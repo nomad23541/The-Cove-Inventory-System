@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" stylesheets="@../../../../res/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.InventoryController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" stylesheets="@../../../../res/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.InventoryController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="581.0" prefHeight="70.0" prefWidth="872.0" spacing="8.0" styleClass="hbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -70,6 +70,32 @@
                </children>
                <padding>
                   <Insets left="19.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+      <VBox layoutX="449.0" layoutY="296.0" prefHeight="254.0" prefWidth="406.0" styleClass="panel">
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="122.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="284.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="timeDetail" text="00:00" GridPane.columnIndex="1" />
+                  <Label fx:id="dateDetail" text="00/00/00" />
+                  <Label fx:id="subtotalDetail" text="subtotal_of_transactions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Total Today:" GridPane.rowIndex="1" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="19.0" right="19.0" top="10.0" />
                </padding>
             </GridPane>
          </children>

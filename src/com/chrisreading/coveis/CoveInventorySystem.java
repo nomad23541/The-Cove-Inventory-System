@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.chrisreading.coveis.handler.DataManager;
 import com.chrisreading.coveis.handler.InventoryManager;
-import com.chrisreading.coveis.model.Item;
 
 import javafx.application.Application;
 
@@ -13,8 +12,8 @@ import javafx.application.Application;
  */
 public class CoveInventorySystem {
 	
-	private InventoryManager im; // inventory manager used
-	private DataManager dm; // data manager used
+	private InventoryManager im;
+	private DataManager dm;
 	
 	public CoveInventorySystem() throws ClassNotFoundException, IOException {
 		im = new InventoryManager();

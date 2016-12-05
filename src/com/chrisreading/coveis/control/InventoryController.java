@@ -1,6 +1,11 @@
 package com.chrisreading.coveis.control;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.handler.InventoryManager;
@@ -49,6 +54,12 @@ public class InventoryController {
 	private Label priceDetail;
 	@FXML
 	private Label amountDetail;
+	@FXML
+	private Label dateDetail;
+	@FXML
+	private Label timeDetail;
+	@FXML
+	private Label subtotalDetail;
 	@FXML
 	private GridPane gridPane;
 	
@@ -103,6 +114,25 @@ public class InventoryController {
 		        refreshGrid();
 			}
 		});
+		
+		// update time
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+        	@Override
+        	public void run() {
+        		Platform.runLater(new Runnable() {
+        			public void run() {
+        		        DateFormat timeFormat = new SimpleDateFormat("HH:mm a");
+        		        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+
+        		        Date date = new Date();
+        		        
+        		        dateDetail.textProperty().set(dateFormat.format(date));
+        		        timeDetail.textProperty().set(timeFormat.format(date));	
+        			}
+        		});
+        	}
+        }, 0, 2000);
 	}
 	
 	@FXML
