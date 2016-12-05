@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="311.0" styleClass="root" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.ConfirmationDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="311.0" styleClass="dialog" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.ConfirmationDialogController">
    <children>
       <ButtonBar layoutX="97.0" layoutY="58.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
@@ -13,6 +13,6 @@
             <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Confirm" />
         </buttons>
       </ButtonBar>
-      <Label fx:id="text" layoutX="33.0" layoutY="36.0" prefHeight="17.0" prefWidth="245.0" text="text" />
+      <Label fx:id="text" layoutX="20.0" layoutY="26.0" prefHeight="17.0" prefWidth="271.0" text="text" />
    </children>
 </AnchorPane>

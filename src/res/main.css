@@ -3,6 +3,13 @@
 	-fx-text-fill: #333333;
 	
 	-fx-background-color: #ecf0f1;
+	
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+}
+
+.dialog {
+	-fx-background-color: white;
 }
 
 .hbox {
@@ -16,6 +23,34 @@
 	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 9, 0, 0, 2);
 }
 
+/** LIST VIEW */
+.list-view {
+	-fx-background-color: white;
+	-fx-border-color: #95a5a6;
+	-fx-border-radius: 3;
+	-fx-border-width: 2;
+}
+
+.list-cell:selected {
+    -fx-background-color: #66ccff;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+/** TEXTFIELD */
+
+.text-field {
+	-fx-background-color: white;
+	-fx-border-color: #95a5a6;
+	-fx-border-radius: 2;
+	-fx-border-width: 2;
+}
+
+.text-field:focused {
+	-fx-border-color: #2ecc71;
+}
+
+/* BUTTON */
 
 .button {
     -fx-background-radius: 2;
@@ -38,10 +73,27 @@
 	-fx-background-color: #e74c3c;
 }
 
+.button.button-continue {
+	-fx-background-color: #2ecc71;
+}
+
+.button.button-continue:pressed {
+	-fx-background-color: #27ae60;
+}
+
+.button.button-warn:pressed {
+	-fx-background-color: #f39c12;
+}
+
+.button.button-confirm:pressed {
+	-fx-background-color: #c0392b;
+}
+
 .button:pressed {
 	-fx-background-color: #95a5a6;
 }
 
+/** TABLE */
 
 .table-view {
 	-fx-background-color: transparent;
@@ -50,9 +102,6 @@
 .table-view:focused{
     -fx-background-color: transparent;
 }
-
-/* Spaltenköpfe
-    Struktur column-header-background -> column-header */
 
 .table-view .column-header-background{
     -fx-background-color: #ecf0f1;

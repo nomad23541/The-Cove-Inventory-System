@@ -28,7 +28,7 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="14.0" prefHeight="535.0" prefWidth="414.0" styleClass="panel" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="444.0" AnchorPane.topAnchor="14.0">
          <children>
-            <TableView fx:id="table" maxHeight="-Infinity" onKeyPressed="#onTableKeyPress" onMouseClicked="#onTableClick" prefHeight="540.0" prefWidth="414.0">
+            <TableView fx:id="table" maxHeight="-Infinity" onKeyPressed="#onTableKeyPress" onMouseClicked="#onTableClick" prefHeight="535.0" prefWidth="425.0">
               <columns>
                 <TableColumn fx:id="nameCol" prefWidth="108.0" text="Name" />
                 <TableColumn fx:id="priceCol" prefWidth="101.0" text="Price" />
