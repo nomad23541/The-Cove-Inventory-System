@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+// 100 COMMITS. This is the most dedicated project I've had.
 public class CoveApplication extends Application {
 
 	private Stage primaryStage;
