@@ -122,13 +122,17 @@ public class InventoryController {
         	public void run() {
         		Platform.runLater(new Runnable() {
         			public void run() {
-        		        DateFormat timeFormat = new SimpleDateFormat("HH:mm a");
-        		        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+        				try {
+            		        DateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+            		        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
 
-        		        Date date = new Date();
-        		        
-        		        dateDetail.textProperty().set(dateFormat.format(date));
-        		        timeDetail.textProperty().set(timeFormat.format(date));	
+            		        Date date = new Date();
+            		        
+            		        dateDetail.textProperty().set(dateFormat.format(date));
+            		        timeDetail.textProperty().set(timeFormat.format(date));		
+        				} finally {
+        					timer.cancel(); // close to ensure exit of program
+        				}
         			}
         		});
         	}
