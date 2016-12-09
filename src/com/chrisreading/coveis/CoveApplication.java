@@ -8,6 +8,7 @@ import com.chrisreading.coveis.control.dialog.AboutDialogController;
 import com.chrisreading.coveis.control.dialog.AddItemDialogController;
 import com.chrisreading.coveis.control.dialog.CartDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController;
+import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.ButtonsType;
 import com.chrisreading.coveis.control.dialog.EditItemDialogController;
 import com.chrisreading.coveis.model.Item;
 
@@ -65,7 +66,7 @@ public class CoveApplication extends Application {
 		controller.setApplication(this);
 	}
 	
-	public boolean showConfirmationDialog(String title, String text) throws IOException {
+	public boolean showConfirmationDialog(String title, String text, ButtonsType type) throws IOException {
 		// load the fxml file
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/ConfirmationDialog.fxml"));
@@ -85,6 +86,7 @@ public class CoveApplication extends Application {
 		// set the controller
 		ConfirmationDialogController controller = loader.getController();
 		controller.setText(text);
+		controller.setButtonsType(type);
 		controller.setDialogStage(dialogStage);
 		
 		// show the dialog and wait til the user closes it

@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.chrisreading.coveis.CoveApplication;
+import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.ButtonsType;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
 
@@ -75,6 +76,20 @@ public class InventoryController {
 	public void refreshTable() {
 		inventory = FXCollections.observableArrayList(InventoryManager.getInstance().getInventoryList());
 		table.setItems(inventory);
+		
+		Platform.runLater(new Runnable() {
+			public void run() {
+				for(Item item : inventory) {
+					if(item.getAmount() <= 5) {
+						try {
+							ca.showConfirmationDialog("Quantity Warning", "There's " + item.getAmount() + " " + item.getName() + " left!", ButtonsType.OK);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}	
+			}
+		});
 	}
 	
 	/** 
@@ -143,8 +158,10 @@ public class InventoryController {
 	private void onCreateCart() {
 		try {
 			boolean done = ca.showCartDialog(inventory);
-			if(done)
+			if(done) {
 				refreshGrid();
+				refreshTable();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -170,7 +187,7 @@ public class InventoryController {
 		Item item = table.getSelectionModel().getSelectedItem();
 		
 		try {
-			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?");
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?", ButtonsType.OK_CANCEL);
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
@@ -232,8 +249,10 @@ public class InventoryController {
 	 */
 	@FXML
 	private void onTableKeyPress(KeyEvent e) {
+		Item item = table.getSelectionModel().getSelectedItem();
+		
 		try {
-			boolean remove = ca.showConfirmationDialog("Confirmation", "Remove item?");
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?", ButtonsType.OK_CANCEL);
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
