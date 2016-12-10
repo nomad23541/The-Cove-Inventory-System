@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public abstract class ADialogController {
 	
 	/** Reference to application class */
-	private CoveApplication ca;
+	protected CoveApplication ca;
 	
 	/** Stage for this dialog */
 	protected Stage dialogStage;
