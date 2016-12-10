@@ -1,6 +1,7 @@
 package com.chrisreading.coveis.control.dialog;
 
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.ValidationUtil;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -31,6 +32,10 @@ public class EditItemDialogController extends ADialogController {
 				nameField.setText(item.getName());
 				priceField.setText(Double.toString(item.getPrice()));
 				amountField.setText(Integer.toString(item.getAmount()));
+				
+				// validate fields
+				ValidationUtil.validateDecimal(priceField);
+				ValidationUtil.validateNumeral(amountField);
 			}
 		});
 	}

@@ -1,6 +1,7 @@
 package com.chrisreading.coveis.control.dialog;
 
 import com.chrisreading.coveis.model.Item;
+import com.chrisreading.coveis.util.ValidationUtil;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,7 +23,11 @@ public class AddItemDialogController extends ADialogController {
 		// use runLater because initialize() isn't ready at first
 		Platform.runLater(new Runnable() {
 			public void run() {
-				nameField.requestFocus();	
+				nameField.requestFocus();
+				
+				// set field validations
+				ValidationUtil.validateDecimal(priceField);
+				ValidationUtil.validateNumeral(amountField);
 			}
 		});
 	}
