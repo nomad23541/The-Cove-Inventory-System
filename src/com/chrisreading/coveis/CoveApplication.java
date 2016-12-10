@@ -9,6 +9,7 @@ import com.chrisreading.coveis.control.dialog.AddItemDialogController;
 import com.chrisreading.coveis.control.dialog.CartDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.ButtonsType;
+import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.DialogType;
 import com.chrisreading.coveis.control.dialog.EditItemDialogController;
 import com.chrisreading.coveis.model.Item;
 
@@ -66,7 +67,7 @@ public class CoveApplication extends Application {
 		controller.setApplication(this);
 	}
 	
-	public boolean showConfirmationDialog(String title, String text, ButtonsType type) throws IOException {
+	public boolean showConfirmationDialog(String title, String text, ButtonsType buttonsType, DialogType dialogType) throws IOException {
 		// load the fxml file
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(CoveInventorySystem.class.getResource("view/dialog/ConfirmationDialog.fxml"));
@@ -77,6 +78,7 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle(title);
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.sizeToScene();
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
@@ -86,7 +88,8 @@ public class CoveApplication extends Application {
 		// set the controller
 		ConfirmationDialogController controller = loader.getController();
 		controller.setText(text);
-		controller.setButtonsType(type);
+		controller.setButtonsType(buttonsType);
+		controller.setDialogType(dialogType);
 		controller.setDialogStage(dialogStage);
 		controller.setApplication(this);
 		
@@ -107,6 +110,7 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle("Add Item");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.sizeToScene();
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
@@ -136,6 +140,7 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle("Edit Item");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.sizeToScene();
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
@@ -165,6 +170,7 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle("About");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.sizeToScene();
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
@@ -192,6 +198,7 @@ public class CoveApplication extends Application {
 		dialogStage.setTitle("Cart");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setResizable(false);
+		dialogStage.sizeToScene();
 		dialogStage.getIcons().add(new Image(CoveInventorySystem.class.getResourceAsStream("/res/icon.png")));
 		dialogStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);

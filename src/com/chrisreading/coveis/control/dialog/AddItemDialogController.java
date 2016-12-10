@@ -3,6 +3,7 @@ package com.chrisreading.coveis.control.dialog;
 import java.io.IOException;
 
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.ButtonsType;
+import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.DialogType;
 import com.chrisreading.coveis.model.Item;
 import com.chrisreading.coveis.util.ValidationUtil;
 
@@ -39,7 +40,7 @@ public class AddItemDialogController extends ADialogController {
 		if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || amountField.getText().isEmpty()) {
 			// show error dialog
 			try {
-				ca.showConfirmationDialog("Field Error", "Make sure all fields are filled in correctly", ButtonsType.OK);
+				ca.showConfirmationDialog("Field Error", "Make sure all fields are filled in correctly", ButtonsType.OK, DialogType.ERROR);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

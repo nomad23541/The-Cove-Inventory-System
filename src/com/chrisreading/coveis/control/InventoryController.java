@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 import com.chrisreading.coveis.CoveApplication;
 import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.ButtonsType;
+import com.chrisreading.coveis.control.dialog.ConfirmationDialogController.DialogType;
 import com.chrisreading.coveis.handler.InventoryManager;
 import com.chrisreading.coveis.model.Item;
 
@@ -82,7 +83,7 @@ public class InventoryController {
 				for(Item item : inventory) {
 					if(item.getAmount() <= 5) {
 						try {
-							ca.showConfirmationDialog("Quantity Warning", "There's " + item.getAmount() + " " + item.getName() + " left!", ButtonsType.OK);
+							ca.showConfirmationDialog("Quantity Warning", "There's " + item.getAmount() + " " + item.getName() + " left!", ButtonsType.OK, DialogType.WARNING);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -187,7 +188,7 @@ public class InventoryController {
 		Item item = table.getSelectionModel().getSelectedItem();
 		
 		try {
-			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?", ButtonsType.OK_CANCEL);
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?", ButtonsType.OK_CANCEL, DialogType.WARNING);
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
@@ -252,7 +253,7 @@ public class InventoryController {
 		Item item = table.getSelectionModel().getSelectedItem();
 		
 		try {
-			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?", ButtonsType.OK_CANCEL);
+			boolean remove = ca.showConfirmationDialog("Confirmation", "Are you sure you want to remove " + item.getName() + "?", ButtonsType.OK_CANCEL, DialogType.WARNING);
 			
 			// if ok is clicked, remove the selected item
 			if(remove) {
