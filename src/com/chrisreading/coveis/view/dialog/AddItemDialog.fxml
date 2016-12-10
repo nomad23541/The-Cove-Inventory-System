@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="223.0" styleClass="dialog" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.AddItemDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="223.0" styleClass="dialog" stylesheets="@../../../../../res/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chrisreading.coveis.control.dialog.AddItemDialogController">
    <children>
-      <ButtonBar layoutX="12.0" layoutY="134.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="11.0" layoutY="134.0" prefHeight="40.0" prefWidth="199.0">
         <buttons>
           <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
             <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Add" />

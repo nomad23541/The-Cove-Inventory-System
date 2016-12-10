@@ -74,7 +74,7 @@
             </GridPane>
          </children>
       </VBox>
-      <VBox layoutX="449.0" layoutY="284.0" prefHeight="254.0" prefWidth="406.0" styleClass="panel" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="284.0">
+      <VBox layoutX="449.0" layoutY="284.0" prefHeight="250.0" prefWidth="406.0" styleClass="panel" AnchorPane.bottomAnchor="79.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="284.0">
          <children>
             <GridPane>
               <columnConstraints>
