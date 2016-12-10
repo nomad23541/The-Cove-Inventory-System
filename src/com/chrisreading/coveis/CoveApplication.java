@@ -88,6 +88,7 @@ public class CoveApplication extends Application {
 		controller.setText(text);
 		controller.setButtonsType(type);
 		controller.setDialogStage(dialogStage);
+		controller.setApplication(this);
 		
 		// show the dialog and wait til the user closes it
 		dialogStage.showAndWait();
@@ -116,6 +117,7 @@ public class CoveApplication extends Application {
 		AddItemDialogController controller = loader.getController();
 		controller.setItem(item);
 		controller.setDialogStage(dialogStage);
+		controller.setApplication(this);
 		
 		// show the dialog and wait til the user closes it
 		dialogStage.showAndWait();
@@ -144,6 +146,7 @@ public class CoveApplication extends Application {
 		EditItemDialogController controller = loader.getController();
 		controller.setItem(item);
 		controller.setDialogStage(dialogStage);
+		controller.setApplication(this);
 		
 		// show the dialog and wait til the user closes it
 		dialogStage.showAndWait();
