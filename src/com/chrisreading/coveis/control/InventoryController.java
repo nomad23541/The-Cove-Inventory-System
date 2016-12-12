@@ -19,11 +19,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 /**
  * Controller class to handle InventoryView.fxml
@@ -69,30 +71,6 @@ public class InventoryController {
 	
 	public InventoryController() {}
 	
-	/**
-	 * Refresh the list by setting the
-	 * observable list to the inventory manager's
-	 * list and then set the table items
-	 */
-	public void refreshTable() {
-		inventory = FXCollections.observableArrayList(InventoryManager.getInstance().getInventoryList());
-		table.setItems(inventory);
-		
-		Platform.runLater(new Runnable() {
-			public void run() {
-				for(Item item : inventory) {
-					if(item.getAmount() <= 5) {
-						try {
-							ca.showConfirmationDialog("Quantity Warning", "There's " + item.getAmount() + " " + item.getName() + " left!", ButtonsType.OK, DialogType.WARNING);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}	
-			}
-		});
-	}
-	
 	/** 
 	 * Refresh that grid pane
 	 * that displays the item information
@@ -113,7 +91,9 @@ public class InventoryController {
 
 	@FXML
 	public void initialize() {
-		refreshTable();
+		// create list from loaded items, then tie them to the table
+		inventory = FXCollections.observableArrayList(InventoryManager.getInstance().getInventoryList());
+		table.setItems(inventory);
 		
 		// load table with loaded items in list
 		nameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
@@ -129,6 +109,31 @@ public class InventoryController {
 		        
 		        refreshGrid();
 			}
+		});
+		
+		// if there is less than 5 in the amount column,
+		// text will turn red
+		amountCol.setCellFactory(column -> {
+		    return new TableCell<Item, Number>() {
+		        @Override
+		        protected void updateItem(Number item, boolean empty) {
+		            super.updateItem(item, empty); //This is mandatory
+
+		            if (item == null || empty) { //If the cell is empty
+		                setText(null);
+		                setStyle("");
+		            } else {
+		                setText(item.toString()); //Put the String data in the cell
+		                Item i = getTableView().getItems().get(getIndex());
+
+		                if (i.getAmount() <= 5) {
+		                    setStyle("-fx-text-fill: #e74c3c");
+		                } else {
+		                	setStyle("-fx-text-fill: black");
+		                }
+		            }
+		        }
+		    };
 		});
 		
 		// update time
@@ -161,7 +166,17 @@ public class InventoryController {
 			boolean done = ca.showCartDialog(inventory);
 			if(done) {
 				refreshGrid();
-				refreshTable();
+				
+				// show warning that there are only 5 or less in quantity
+				for(Item item : inventory) {
+					if(item.getAmount() <= 5) {
+						try {
+							ca.showConfirmationDialog("Quantity Warning", "There's " + item.getAmount() + " " + item.getName() + " left!", ButtonsType.OK, DialogType.WARNING);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -175,10 +190,8 @@ public class InventoryController {
 			boolean add = ca.showAddDialog(item);
 			if(add) {
 				InventoryManager.getInstance().addItem(item);
-				refreshTable();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -193,7 +206,6 @@ public class InventoryController {
 			// if ok is clicked, remove the selected item
 			if(remove) {
 				InventoryManager.getInstance().removeItem(item);
-				refreshTable();
 				refreshGrid();
 			}
 		} catch (IOException e) {
@@ -210,7 +222,6 @@ public class InventoryController {
 		try {
 			boolean done = ca.showEditDialog(item);
 			if(done) {
-				refreshTable();
 				refreshGrid();
 			}
 		} catch (IOException e) {
@@ -232,9 +243,6 @@ public class InventoryController {
 			try {			
 				if(item != null) {
 					boolean done = ca.showEditDialog(item);
-					if(done) {
-						refreshTable();
-					}	
 				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -258,7 +266,6 @@ public class InventoryController {
 			// if ok is clicked, remove the selected item
 			if(remove) {
 				InventoryManager.getInstance().removeItem(table.getSelectionModel().getSelectedItem());
-				refreshTable();
 			}
 		} catch (IOException ei) {
 			ei.printStackTrace();
