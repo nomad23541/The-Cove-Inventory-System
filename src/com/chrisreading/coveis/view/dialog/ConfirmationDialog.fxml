@@ -12,7 +12,7 @@
       <ButtonBar layoutX="162.0" layoutY="86.0" prefHeight="40.0" prefWidth="200.0" stylesheets="@../../../../../res/main.css">
         <buttons>
           <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
-            <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Confirm" />
+            <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" styleClass="button-confirm" text="Confirm" />
         </buttons>
       </ButtonBar>
       <Label fx:id="text" layoutX="87.0" layoutY="36.0" prefHeight="20.0" prefWidth="283.0" text="text">
